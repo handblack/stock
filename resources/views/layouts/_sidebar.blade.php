@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('balanza.index') }}" class="nav-link {{ request()->is('inventario/balazan*') ? 'active' : '' }}">
+                            <a href="{{ route('balanza.index') }}" class="nav-link {{ request()->is('inventario/balanza*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Balanza</p>
                             </a>

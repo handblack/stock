@@ -14,10 +14,10 @@ class BalanzaController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $result = VBalanza::whereBetween('fechaemision',['2023-01-01','2023-10-01'])
                     ->orderBy('fechaemision','desc')
-                    ->paginate(25)
+                    ->paginate(30)
                     ->withQueryString();
         return view('inventario.balanza_list',[
             'result' => $result,

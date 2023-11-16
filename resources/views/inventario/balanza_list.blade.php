@@ -8,6 +8,14 @@
 <script src="{{ asset('plugins/datatables-scroller/js/scroller.bootstrap4.min.js') }}"></script>
 @endpush
 
+@push('style')
+<style>
+.table-sm td {
+    padding: 0.1rem;
+}
+</style>
+@endpush
+
 @section('content')
 <div class="row">
     <div class="col-md-12 float-right">
@@ -16,7 +24,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="card" style="font-size:0.9rem;">
+        <div class="card" style="font-size:0.85rem;">
             <div class="card-body table-responsive p-0">
                 <table id="table-balanza" class="display nowrap table table-sm table-hover">
                     <thead>
@@ -53,15 +61,15 @@
                                 <td>{{ $item->color }}</td>
                                 <td>{{ $item->codigo }}</td>
                                 <td>{{ $item->ancho }}</td>
-                                <td>{{ $item->rendimiento }}</td>
+                                <td class="text-right text-monospace pr-2">{{ $item->rendimiento }}</td>
                                 <td>{{ $item->net }}</td>
                                 <td>{{ $item->hilado }}</td>
                                 <td>{{ $item->operacion }}</td>
                                 <td>{{ $item->partida }}</td>
                                 <td>{{ $item->local }}</td>
                                 <td>{{ $item->cantidad }}</td>
-                                <td>{{ $item->rollos }}</td>
-                                <td>{{ $item->peso }}</td>
+                                <td>{{ $item->rollo }}</td>
+                                <td class="text-right text-monospace">{{ $item->peso }}</td>
                             </tr>
                         @empty
                             
