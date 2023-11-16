@@ -106,6 +106,12 @@
                                 <p>Stock</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('balanza.index') }}" class="nav-link {{ request()->is('inventario/balazan*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Balanza</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-header"> </li>

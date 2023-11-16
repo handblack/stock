@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BalanzaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/inventario/movimientos',[ReportController::class,'movimiento'])->name('movimiento');
     Route::get('/inventario/stock',[ReportController::class,'stock'])->name('stock');
+    Route::resource('/inventario/balanza/manager',BalanzaController::class,['names' => 'balanza']);
     Route::post('/inventario/stock/download/move',[ReportController::class,'index_submit_move'])->name('index_submit_move');
     Route::post('/inventario/stock/download/stock',[ReportController::class,'index_submit_stock'])->name('index_submit_stock');
 });
