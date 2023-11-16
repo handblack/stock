@@ -10,9 +10,14 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ReportController extends Controller
 {
-    public function index(){
-        return view('report.index');
+    public function stock(){
+        return view('report.stock');
     }
+
+    public function movimiento(){
+        return view('report.movimiento');
+    }
+
     public function index_submit_move(Request $request){
         $request->validate([
             '_module' => 'required',
