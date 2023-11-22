@@ -114,6 +114,24 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{ request()->is('inventario*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('inventario*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-history"></i>
+                        <p>
+                            Log
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('movimiento') }}" class="nav-link {{ request()->is('inventario/movimiento*') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Movimientos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-header"> </li>
                 <li class="nav-item">
                     <a href="#" onclick="document.getElementById('FormLogoutSystem').submit(); return false;" class="nav-link">
