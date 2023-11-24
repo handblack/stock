@@ -30,3 +30,11 @@ sudo supervisorctl start all
 
 // then check status
 sudo supervisorctl status
+
+
+supervisorctl reread
+supervisorctl update
+supervisorctl start telegram-work:*
+supervisorctl status
+
+### Telegram :: Manual
