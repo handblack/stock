@@ -114,8 +114,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ request()->is('inventario*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('inventario*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('log*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('log*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-history"></i>
                         <p>
                             Log
@@ -124,9 +124,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('movimiento') }}" class="nav-link {{ request()->is('inventario/movimiento*') ? 'active' : '' }}">
+                            <a href="{{ route('changelog.index') }}" class="nav-link {{ request()->is('log/changelog*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Movimientos</p>
+                                <p>ChangeLog</p>
                             </a>
                         </li>
                     </ul>
