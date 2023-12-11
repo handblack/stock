@@ -8,7 +8,7 @@
         <input type="hidden" name="_module" value="stock">
         <div class="card">
             <div class="card-body">
-                <input type="text" name="dateend">
+                <input type="date" name="dateend" value="{{ date('Y-m-d') }}">
                 <button type="submit">Descagar STOCK</button>
             </div>
         </div>

@@ -28,8 +28,22 @@ class ReportController extends Controller
                 break;
         }
     }
-    public function index_submit_stock(Request $request){
 
+    public function index_submit_stock(Request $request){
+        $request->validate([
+            'dateend'   => 'required',
+        ]);
+
+        return response()->streamDownload(function () use ($request) {
+            $title = 'stock_'.Carbon::parse($request->dateend)->format('d_m_Y');
+            $spreadsheet = new Spreadsheet;
+            $sheet       = $spreadsheet->getActiveSheet();
+            $sheet->setTitle($title);
+            $sheet->setCellValue('A1', 'CODIGO');
+            $sheet->setCellValue('B1', 'PRODUCTO');
+            $spreadsheet->setActiveSheetIndexByName($title);
+            (new Xlsx($spreadsheet))->save('php://output');            
+        }, 'rpt_stock_'.date("Ymd_His").'.xlsx');
     }
 
     public function descargar_excel(Request $request){
