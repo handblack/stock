@@ -1,4 +1,4 @@
-@extends('layouts.app',['sidebar' => '_sidebar-sistema'])
+@extends('layouts.app', ['sidebar' => '_sidebar-sistema'])
 
 @push('header')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1><i class="fas fa-file-alt fa-fw"></i> ChangeLog </h1>
+                    <h1><i class="fas fa-random fa-fw"></i> ChangeLog </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -39,8 +39,11 @@
                                         <button type="submit" class="btn btn-warning">
                                             <i class="fas fa-search"></i>
                                         </button>
+                                        {{--
+                                            
                                         <a href="{{ route('changelog.create') }}" class="btn btn-success"><i
                                                 class="far fa-plus-square fa-fw"></i> NUEVO</a>
+                                        --}}
                                     </div>
                                 </div>
                             </div>
@@ -56,64 +59,75 @@
 @endsection
 
 @section('content')
-<div class="card">
-    <div class="card-body table-responsive p-0">
-        <table class="table table-sm table-hover">
-            <thead>
-                <tr>
-                    <th width="65"></th>
-                    <th>Nombre del documento</th>
-                    <th>Codigo</th>
-                    <th class="text-center" width="100">GRP</th>
-                    <th width="90"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($result as $item)
+    <div class="card">
+        <div class="card-body table-responsive p-0">
+            <table class="table table-sm table-hover">
+                <thead>
                     <tr>
-                        <td class="text-monospace">{{ $item->shortname }}</td>
-                        <td class="text-monospace">{{ $item->doctypename }}</td>
-                        <td class="text-monospace">{{ $item->doctypecode }}</td>
-                        <td class="text-center">
-                            @switch($item->group_id)
-                                @case(1)
-                                    <i class="far fa-address-card fa-fw"></i>
-                                    @break
-                                @case(2)
-                                    <i class="far fa-file-alt fa-fw"></i>
-                                    @break
-                                @case(3)
-                                    <i class="fas fa-cubes fa-fw"></i>
-                                    @break
-                                @case(4)
-                                    <i class="fab fa-windows fa-fw"></i>
-                                    @break
-                                @default
-                                    
-                            @endswitch
-                        </td>
-                        <td class="text-right border-left">
-                            @if(!in_array($item->group_id,[3,4]))
-                                <a href="{{ route('doctype.edit', $item->token) }}">
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                &nbsp;|&nbsp;
-                                <a href="#" class="delete-record" data-id="{{ $item->id }}"
-                                    data-url="{{ route('doctype.destroy', $item->token) }}">
-                                    <i class="far fa-trash-alt"></i>
-                                </a>
-                            @else
-                            <i class="far fa-edit"></i>
-                            &nbsp;|&nbsp;
-                            <i class="far fa-trash-alt"></i>
-                            @endif
-                        </td>
+                        <th width="180">FECHA</th>
+                        <th width="150">TABLA</th>
+                        <th width="70">CRUD</th>
+                        <th>USUARIO</th>
+                        <th>ID1:ID2</th>
+                        <th width="60"></th>
                     </tr>
-                @empty
-                    
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($result as $item)
+                        <tr>
+                            <td class="">{{ $item->created_at }}</td>
+                            <td class="">{{ $item->module }}</td>
+                            <td class="">{{ $item->action }}</td>
+                            <td class="">{{ $item->usuario_id ? $item->vusuario->usuario : '' }}</td>
+                            <td class="text-monospace">{{ $item->record_id1 }}:{{ $item->record_id2 }}</td>
+                            <td class="text-right">
+                                <a href="#" onclick="showinfo({{ $item->id }});return false;" data-id="{{ $item->id }}"  data-url="{{ route('changelog.show',$item->id) }}" data-toggle="modal" data-target="#ModalInfoChangeLog">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="10">
+                                No hay registros!!
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ $result->links('layouts.paginate') }}
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="ModalInfoChangeLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" id="detalleajax">
+                <div class="modal-body">
+                    Cargando información ...
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('script')
+<script>
+function showinfo(id){
+    $.ajax({
+        type: "GET",
+        url: '{{ route('changelog.index') }}/' + id,        
+        dataType: "text",
+        success : function(data) {
+                $("#detalleajax").html(data);
+        }
+    });
+}
+</script>
+@endpush

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\TelegramJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -38,7 +39,8 @@ class TelegramCron extends Command
      */
     public function handle()
     {
-        Log::info("Cron is working fine!");
+        $this->info(date("Y-m-d H:i:s").' - Execute RUN Telegram JOB');
+        dispatch(new TelegramJob());
         return 0;
     }
 }

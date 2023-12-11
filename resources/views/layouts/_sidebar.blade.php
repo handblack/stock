@@ -125,7 +125,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('changelog.index') }}" class="nav-link {{ request()->is('log/changelog*') ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-random nav-icon"></i>
                                 <p>ChangeLog</p>
                             </a>
                         </li>

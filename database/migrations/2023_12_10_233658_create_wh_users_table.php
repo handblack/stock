@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWhLogChangesTable extends Migration
+class CreateWhUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateWhLogChangesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wh_log_changes', function (Blueprint $table) {
+        /*
+        Schema::create('wh_users', function (Blueprint $table) {
             $table->id();
-            $table->string('module',50);            
-            $table->text('message')->nullable();
-            $table->foreignId('usuario_id')->nullable();
-            $table->foreign('usuario_id')->references('usuario_id')->on('usuarios');
             $table->timestamps();
         });
+        */
     }
 
     /**
@@ -30,6 +28,8 @@ class CreateWhLogChangesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wh_log_changes');
+        /*
+        Schema::dropIfExists('wh_users');
+        */
     }
 }
